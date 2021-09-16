@@ -1,46 +1,74 @@
-# Getting Started with Create React App
+# Modal Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Author: [Aaron Garcia Hervas](https://twitter.com/aarongarciah) (aarongarciahervas@gmail.com)  
+Date: 2021-09-24
 
-## Available Scripts
+## Before you review
 
-In the project directory, you can run:
+- Take a look at what we are reviewing: [Design System Challenge.pdf](./docs/Design%20System%20Challenge.pdf)
+- Read the [Considerations](#considerations) and [Possible Improvements](#possible-improvements) sections.
 
-### `yarn start`
+## Considerations
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Decisions without context don't have much value, that's why I wrote the RFC making some (made up) assumptions:
+  - The design system is serving high paced teams that need to ship as fast as possible without the design system being a bottleneck.
+  - The rest of the design system is being built optimized for change, meaning that it's preferred to have some flexibility at a consumption level and leaving consumers a certain grade of customization over closed APIs that require components to changes their APIs continuosly.
+  - The design system team want to keep external dependencies to a bare minimum.
+- In a real world scenario I would probably use a proven solution like [Radix Primitives](https://www.radix-ui.com/docs/primitives/components/dialog) or [React Aria](https://react-spectrum.adobe.com/react-aria/useDialog.html) since these are battle tested and very generic solutions to build on top of them, but since this is a challenge I didn't.
+- I didn't pay much attention to:
+  - The setup, linting, etc. This is just a bare create-react-app project with some modifications.
+  - Setup of design tokens and the styling solution in general.
+  - The design.
+  - Storybook controls (previously known as knobs).
+- I would make `AlertDialog` a component built on top of `Dialog` to cover the 3 mockups. This is mentioned in the RFC, but since the RFC only covers the modal I haven't created `AlertDialog`. Also for brevity and to constrain the time of the challenge I added the 3 alert dialogs as 3 different stories using `Dialog`.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Possible Improvements
 
-### `yarn test`
+This `Dialog` component is far from perfect. Lots of work should be done to get there, for example:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Block page scrolling when dialog opens.
+- Reserve space for the scrollbar to avoid a page jump.
+- Mount/unmount animations.
+- Reset styles per component instead of globally.
+- Add SSR support.
+- etc.
 
-### `yarn build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone this repository
+2. Install dependencies
+   ```
+   yarn
+   ```
+3. Start storybook
+   ```
+   yarn storybook
+   ```
+4. A new tab (http://localhost:6006) will be auto-opened in your browser
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Tests
 
-### `yarn eject`
+Run tests with this command:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+yarn test
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> React components tests are written with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Tech colophon
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Typescript
+- Storybook
+- ESLint
+- Prettier
+- lint-staged/husky
+- Jest
+- Chromatic (cloud based solution for Storybook visual regression tests)
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Made with ❤️ by [Aaron Garcia Hervas](https://twitter.com/aarongarciah) (aarongarciahervas@gmail.com)
