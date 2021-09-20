@@ -1,7 +1,8 @@
+import { globalStyles } from './globalStyles';
+
 function App() {
-  return (
-    <h1>Welcome</h1>
-  );
+  globalStyles();
+  return <h1>Welcome</h1>;
 }
 
 export default App;

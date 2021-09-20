@@ -11,3 +11,10 @@ export const parameters = {
     },
   },
 };
+
+export const decorators = [
+  (Story) => {
+    globalStyles();
+    return React.createElement(Story);
+  },
+];
