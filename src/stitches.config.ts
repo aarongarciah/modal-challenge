@@ -49,6 +49,9 @@ export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme
         2: '4px',
         control: '$1',
       },
+      zIndices: {
+        dialog: 9999,
+      },
     },
     media: {
       bp1: '(width >= 480px)',
