@@ -295,3 +295,30 @@ Form.args = {
     </Dialog>
   ),
 };
+
+export const AvoidClosingOnOverlayClick = Template.bind({});
+AvoidClosingOnOverlayClick.args = {
+  children: ({ open, onClose, ...args }: any) => (
+    <Dialog open={open} onClose={onClose} closeOnOverlayClick={false} {...args}>
+      <Dialog.Header>
+        <Dialog.Title>Title</Dialog.Title>
+        <Dialog.CloseButton />
+      </Dialog.Header>
+      <Dialog.Content>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien, nec
+          tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in, pretium
+          vulputate enim. Praesent blandit eu sem sed vehicula.
+        </p>
+      </Dialog.Content>
+      <Dialog.Footer>
+        <Dialog.Actions>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button variant="primary" onClick={onClose}>
+            Apply
+          </Button>
+        </Dialog.Actions>
+      </Dialog.Footer>
+    </Dialog>
+  ),
+};

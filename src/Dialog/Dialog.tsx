@@ -7,14 +7,11 @@ import { Heading } from '../Heading';
 import { Box } from '../Box';
 import { useId } from '../hooks';
 
-const DialogContext = React.createContext<{ labelId?: string; onClose?: () => void }>({});
-
-interface DialogProps {
-  children: React.ReactNode;
-  onClose: () => void;
-  open?: boolean;
-  size?: Stitches.VariantProps<typeof Inner>['size'];
-}
+const DialogContext = React.createContext<{
+  closeOnOverlayClick?: boolean;
+  labelId?: string;
+  onClose?: () => void;
+}>({});
 
 type OuterProps = React.ComponentProps<typeof Box> & { css?: any };
 
@@ -39,7 +36,7 @@ const Outer = (props: OuterProps) => (
 type OverlayProps = React.ComponentProps<typeof Box> & { css?: any };
 
 const Overlay = (props: OverlayProps) => {
-  const { onClose } = React.useContext(DialogContext);
+  const { closeOnOverlayClick, onClose } = React.useContext(DialogContext);
   return (
     <Box
       css={{
@@ -51,7 +48,7 @@ const Overlay = (props: OverlayProps) => {
         background: '$black',
         opacity: '0.48',
       }}
-      onClick={onClose}
+      onClick={closeOnOverlayClick ? onClose : undefined}
       {...props}
     />
   );
@@ -172,10 +169,25 @@ const DialogActions = styled('div', {
   gap: '$2',
 });
 
-const Dialog = ({ children, onClose, open, size = 'regular', ...rest }: DialogProps) => {
+interface DialogProps {
+  children: React.ReactNode;
+  closeOnOverlayClick?: boolean;
+  onClose?: () => void;
+  open?: boolean;
+  size?: Stitches.VariantProps<typeof Inner>['size'];
+}
+
+const Dialog = ({
+  children,
+  closeOnOverlayClick = true,
+  onClose,
+  open,
+  size = 'regular',
+  ...rest
+}: DialogProps) => {
   const labelId = useId();
   return open ? (
-    <DialogContext.Provider value={{ labelId, onClose }}>
+    <DialogContext.Provider value={{ closeOnOverlayClick, labelId, onClose }}>
       <Outer>
         <Overlay />
         <Inner aria-labelledby={labelId} size={size} {...rest}>
