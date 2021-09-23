@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { createPortal } from 'react-dom';
 import FocusLock from 'react-focus-lock';
 import type * as Stitches from '@stitches/react';
 
@@ -201,23 +202,26 @@ const Dialog = ({
   const handleDeactivation = React.useCallback(() => {
     finalFocusRef?.current?.focus();
   }, [finalFocusRef]);
-  return open ? (
-    <DialogContext.Provider value={{ closeOnOverlayClick, labelId, onClose }}>
-      <FocusLock
-        onActivation={handleActivation}
-        onDeactivation={handleDeactivation}
-        autoFocus
-        returnFocus={!finalFocusRef}
-      >
-        <Outer>
-          <Overlay />
-          <Inner aria-labelledby={labelId} size={size} {...rest}>
-            {children}
-          </Inner>
-        </Outer>
-      </FocusLock>
-    </DialogContext.Provider>
-  ) : null;
+  return open
+    ? createPortal(
+        <DialogContext.Provider value={{ closeOnOverlayClick, labelId, onClose }}>
+          <FocusLock
+            onActivation={handleActivation}
+            onDeactivation={handleDeactivation}
+            autoFocus
+            returnFocus={!finalFocusRef}
+          >
+            <Outer>
+              <Overlay />
+              <Inner aria-labelledby={labelId} size={size} {...rest}>
+                {children}
+              </Inner>
+            </Outer>
+          </FocusLock>
+        </DialogContext.Provider>,
+        document.body
+      )
+    : null;
 };
 
 Dialog.Header = DialogHeader;
