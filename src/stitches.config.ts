@@ -39,7 +39,7 @@ export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme
       },
       lineHeights: {
         1: 1,
-        2: 1.5,
+        2: 1.4,
       },
       fontWeights: {
         regular: '400',
