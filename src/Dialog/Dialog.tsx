@@ -1,4 +1,5 @@
 import * as React from 'react';
+import FocusLock from 'react-focus-lock';
 import type * as Stitches from '@stitches/react';
 
 import { styled } from '../stitches.config';
@@ -191,12 +192,14 @@ const Dialog = ({
   const labelId = useId();
   return open ? (
     <DialogContext.Provider value={{ closeOnOverlayClick, labelId, onClose }}>
-      <Outer>
-        <Overlay />
-        <Inner aria-labelledby={labelId} size={size} {...rest}>
-          {children}
-        </Inner>
-      </Outer>
+      <FocusLock autoFocus returnFocus>
+        <Outer>
+          <Overlay />
+          <Inner aria-labelledby={labelId} size={size} {...rest}>
+            {children}
+          </Inner>
+        </Outer>
+      </FocusLock>
     </DialogContext.Provider>
   ) : null;
 };
