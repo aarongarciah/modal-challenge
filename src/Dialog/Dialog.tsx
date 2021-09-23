@@ -178,6 +178,7 @@ interface DialogProps {
   children: React.ReactNode;
   closeOnOverlayClick?: boolean;
   initialFocusRef?: React.RefObject<FocusableElement>;
+  finalFocusRef?: React.RefObject<FocusableElement>;
   onClose?: () => void;
   open?: boolean;
   size?: Stitches.VariantProps<typeof Inner>['size'];
@@ -186,6 +187,7 @@ interface DialogProps {
 const Dialog = ({
   children,
   closeOnOverlayClick = true,
+  finalFocusRef,
   initialFocusRef,
   onClose,
   open,
@@ -196,9 +198,17 @@ const Dialog = ({
   const handleActivation = React.useCallback(() => {
     initialFocusRef?.current?.focus();
   }, [initialFocusRef]);
+  const handleDeactivation = React.useCallback(() => {
+    finalFocusRef?.current?.focus();
+  }, [finalFocusRef]);
   return open ? (
     <DialogContext.Provider value={{ closeOnOverlayClick, labelId, onClose }}>
-      <FocusLock onActivation={handleActivation} autoFocus returnFocus>
+      <FocusLock
+        onActivation={handleActivation}
+        onDeactivation={handleDeactivation}
+        autoFocus
+        returnFocus={!finalFocusRef}
+      >
         <Outer>
           <Overlay />
           <Inner aria-labelledby={labelId} size={size} {...rest}>

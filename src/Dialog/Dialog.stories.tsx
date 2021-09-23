@@ -341,7 +341,8 @@ CustomInitialFocus.args = {
             ref={titleRef}
             css={{ '&:focus': { outline: '2px dotted $black' } }}
           >
-            This element will receive focus
+            This element will receive focus. Remember to add <code>tabIndex={0}</code> to
+            non-interactive elements.
           </Dialog.Title>
           <Dialog.CloseButton />
         </Dialog.Header>
@@ -361,6 +362,47 @@ CustomInitialFocus.args = {
           </Dialog.Actions>
         </Dialog.Footer>
       </Dialog>
+    );
+  },
+};
+
+export const CustomFinalFocus = Template.bind({});
+CustomFinalFocus.args = {
+  children: function CustomFinalFocus({ open, onClose, ...args }: any) {
+    const finalRef = React.useRef<HTMLHeadingElement>(null);
+    return (
+      <>
+        <Box
+          as="p"
+          tabIndex={0}
+          ref={finalRef}
+          css={{ marginTop: '$4', '&:focus': { outline: '2px dotted $black' } }}
+        >
+          This element will receive focus after the dialog is closed. Remember to add{' '}
+          <code>tabIndex={0}</code> to non-interactive elements.
+        </Box>
+        <Dialog open={open} onClose={onClose} finalFocusRef={finalRef} {...args}>
+          <Dialog.Header>
+            <Dialog.Title>Title</Dialog.Title>
+            <Dialog.CloseButton />
+          </Dialog.Header>
+          <Dialog.Content>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien,
+              nec tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in,
+              pretium vulputate enim. Praesent blandit eu sem sed vehicula.
+            </p>
+          </Dialog.Content>
+          <Dialog.Footer>
+            <Dialog.Actions>
+              <Button onClick={onClose}>Cancel</Button>
+              <Button variant="primary" onClick={onClose}>
+                Apply
+              </Button>
+            </Dialog.Actions>
+          </Dialog.Footer>
+        </Dialog>
+      </>
     );
   },
 };
