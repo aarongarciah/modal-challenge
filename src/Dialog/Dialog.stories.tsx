@@ -328,3 +328,39 @@ AvoidClosingOnOverlayClick.args = {
     </Dialog>
   ),
 };
+
+export const CustomInitialFocus = Template.bind({});
+CustomInitialFocus.args = {
+  children: function CustomInitialFocus({ open, onClose, ...args }: any) {
+    const titleRef = React.useRef<HTMLHeadingElement>(null);
+    return (
+      <Dialog open={open} onClose={onClose} initialFocusRef={titleRef} {...args}>
+        <Dialog.Header>
+          <Dialog.Title
+            tabIndex={0}
+            ref={titleRef}
+            css={{ '&:focus': { outline: '2px dotted $black' } }}
+          >
+            This element will receive focus
+          </Dialog.Title>
+          <Dialog.CloseButton />
+        </Dialog.Header>
+        <Dialog.Content>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien, nec
+            tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in, pretium
+            vulputate enim. Praesent blandit eu sem sed vehicula.
+          </p>
+        </Dialog.Content>
+        <Dialog.Footer>
+          <Dialog.Actions>
+            <Button onClick={onClose}>Cancel</Button>
+            <Button variant="primary" onClick={onClose}>
+              Apply
+            </Button>
+          </Dialog.Actions>
+        </Dialog.Footer>
+      </Dialog>
+    );
+  },
+};

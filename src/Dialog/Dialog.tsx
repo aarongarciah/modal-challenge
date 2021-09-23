@@ -8,6 +8,10 @@ import { Heading } from '../Heading';
 import { Box } from '../Box';
 import { useId } from '../hooks';
 
+interface FocusableElement {
+  focus(options?: FocusOptions): void;
+}
+
 const DialogContext = React.createContext<{
   closeOnOverlayClick?: boolean;
   labelId?: string;
@@ -58,9 +62,6 @@ const Overlay = (props: OverlayProps) => {
 const Inner = styled('section', {
   position: 'relative',
   display: 'grid',
-  gridTemplateAreas: `"header"
-    "content"
-    "footer"`,
   gridTemplateRows: 'auto 1fr auto',
   flex: '0 1 auto',
   maxWidth: '100%',
@@ -90,7 +91,7 @@ const Inner = styled('section', {
 const DialogHeader = styled('header', {
   display: 'grid',
   gridTemplateColumns: '1fr auto',
-  gridArea: 'header',
+  gridGap: '$2',
   justifyContent: 'space-between',
   padding: '$3',
   borderBottom: '1px solid $grey400',
@@ -98,10 +99,12 @@ const DialogHeader = styled('header', {
 
 type DialogTitleProps = React.ComponentProps<typeof Heading> & { css?: any };
 
-const DialogTitle = (props: DialogTitleProps) => {
-  const { labelId } = React.useContext(DialogContext);
-  return <Heading id={labelId} {...props} />;
-};
+const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(
+  (props: DialogTitleProps, ref) => {
+    const { labelId } = React.useContext(DialogContext);
+    return <Heading id={labelId} {...props} ref={ref} />;
+  }
+);
 
 interface DialogCloseButtonProps {
   'aria-label'?: string;
@@ -154,14 +157,12 @@ const DialogCloseButton = React.forwardRef<HTMLButtonElement, DialogCloseButtonP
 
 const DialogContent = styled('div', {
   display: 'block',
-  gridArea: 'content',
   padding: '$3',
   overflow: 'auto',
 });
 
 const DialogFooter = styled('footer', {
   display: 'block',
-  gridArea: 'footer',
   padding: '$3',
   borderTop: '1px solid $grey400',
 });
@@ -176,6 +177,7 @@ const DialogActions = styled('div', {
 interface DialogProps {
   children: React.ReactNode;
   closeOnOverlayClick?: boolean;
+  initialFocusRef?: React.RefObject<FocusableElement>;
   onClose?: () => void;
   open?: boolean;
   size?: Stitches.VariantProps<typeof Inner>['size'];
@@ -184,15 +186,19 @@ interface DialogProps {
 const Dialog = ({
   children,
   closeOnOverlayClick = true,
+  initialFocusRef,
   onClose,
   open,
   size = 'regular',
   ...rest
 }: DialogProps) => {
   const labelId = useId();
+  const handleActivation = React.useCallback(() => {
+    initialFocusRef?.current?.focus();
+  }, [initialFocusRef]);
   return open ? (
     <DialogContext.Provider value={{ closeOnOverlayClick, labelId, onClose }}>
-      <FocusLock autoFocus returnFocus>
+      <FocusLock onActivation={handleActivation} autoFocus returnFocus>
         <Outer>
           <Overlay />
           <Inner aria-labelledby={labelId} size={size} {...rest}>
