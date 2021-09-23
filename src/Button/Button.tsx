@@ -24,8 +24,9 @@ const StyledButton = styled('button', {
   lineHeight: '$1',
   fontWeight: '$medium',
   textDecoration: 'none',
-  '&:focus, &:active': {
-    outline: 'none',
+  '&:focus': {
+    outline: '2px dotted $black',
+    outlineOffset: '1px',
   },
   '&:active': {
     transform: 'translateY(1px)',
@@ -35,21 +36,17 @@ const StyledButton = styled('button', {
       default: {
         borderColor: '$grey400',
         backgroundColor: '$white',
-        color: '$blue500',
-        '&:hover': {
-          color: '$black',
-        },
-        '&:focus, &:active': {
+        color: '$primary',
+        '&:hover, &:active': {
           borderColor: '$black',
           color: '$black',
-          outline: 'none',
         },
       },
       primary: {
-        borderColor: '$blue500',
-        backgroundColor: '$blue500',
+        borderColor: '$primary',
+        backgroundColor: '$primary',
         color: '$white',
-        '&:hover, &:focus, &:active': {
+        '&:hover, &:active': {
           borderColor: '$black',
           backgroundColor: '$black',
         },

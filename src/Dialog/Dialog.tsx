@@ -118,8 +118,11 @@ const StyledCloseButton = styled('button', {
   borderRadius: 0,
   background: 'none',
   color: '$grey500',
-  '&:focus, &:active': {
-    outline: 'none',
+  '&:focus': {
+    outline: '2px dotted $black',
+    outlineOffset: '1px',
+  },
+  '&:hover, &:active': {
     color: '$black',
   },
   '&:active': {

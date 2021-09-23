@@ -235,7 +235,13 @@ CustomFooter.args = {
       </Dialog.Content>
       <Dialog.Footer>
         <Box
-          css={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '$2' }}
+          css={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '$2',
+          }}
         >
           <Box css={{ display: 'flex', flexWrap: 'wrap', gap: '$2' }}>
             <IconTextButton icon={<LinkIcon />}>Copy link</IconTextButton>

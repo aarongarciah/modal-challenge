@@ -26,14 +26,16 @@ const StyledButton = styled('button', {
   fontSize: '$1',
   lineHeight: '$1',
   textDecoration: 'none',
-  color: '$blue500',
+  color: '$primary',
+  '&:focus': {
+    outline: '2px dotted $black',
+    outlineOffset: '1px',
+  },
   '&:hover': {
     color: '$black',
   },
-  '&:focus, &:active': {
-    outline: 'none',
-  },
   '&:active': {
+    color: '$black',
     transform: 'translateY(1px)',
   },
 });
