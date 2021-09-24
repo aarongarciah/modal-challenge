@@ -30,7 +30,7 @@ export default {
 type TemplateProps = DialogProps & { children: any };
 
 const Template: ComponentStory<typeof Dialog> = ({ children, onClose, ...args }: TemplateProps) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   return (
     <>
       <Button variant="primary" onClick={() => setOpen(true)}>
