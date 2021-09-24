@@ -62,56 +62,6 @@ Complete.args = {
           tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in, pretium
           vulputate enim. Praesent blandit eu sem sed vehicula.
         </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien, nec
-          tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in, pretium
-          vulputate enim. Praesent blandit eu sem sed vehicula.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien, nec
-          tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in, pretium
-          vulputate enim. Praesent blandit eu sem sed vehicula.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien, nec
-          tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in, pretium
-          vulputate enim. Praesent blandit eu sem sed vehicula.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien, nec
-          tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in, pretium
-          vulputate enim. Praesent blandit eu sem sed vehicula.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien, nec
-          tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in, pretium
-          vulputate enim. Praesent blandit eu sem sed vehicula.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien, nec
-          tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in, pretium
-          vulputate enim. Praesent blandit eu sem sed vehicula.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien, nec
-          tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in, pretium
-          vulputate enim. Praesent blandit eu sem sed vehicula.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien, nec
-          tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in, pretium
-          vulputate enim. Praesent blandit eu sem sed vehicula.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien, nec
-          tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in, pretium
-          vulputate enim. Praesent blandit eu sem sed vehicula.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien, nec
-          tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in, pretium
-          vulputate enim. Praesent blandit eu sem sed vehicula.
-        </p>
       </Dialog.Content>
       <Dialog.Footer>
         <Dialog.Actions>
@@ -466,6 +416,37 @@ Nested.args = {
       </>
     );
   },
+};
+
+export const OverflowingContent = Template.bind({});
+OverflowingContent.args = {
+  children: ({ open, onClose, ...args }: any) => (
+    <Dialog open={open} onClose={onClose} {...args}>
+      <Dialog.Header>
+        <Dialog.Title>Title</Dialog.Title>
+        <Dialog.CloseButton />
+      </Dialog.Header>
+      <Dialog.Content>
+        <Stack space="2">
+          {Array(30).fill(
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien,
+              nec tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in,
+              pretium vulputate enim. Praesent blandit eu sem sed vehicula.
+            </p>
+          )}
+        </Stack>
+      </Dialog.Content>
+      <Dialog.Footer>
+        <Dialog.Actions>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button variant="primary" onClick={onClose}>
+            Apply
+          </Button>
+        </Dialog.Actions>
+      </Dialog.Footer>
+    </Dialog>
+  ),
 };
 
 export const AlertDialogAlert = Template.bind({});
