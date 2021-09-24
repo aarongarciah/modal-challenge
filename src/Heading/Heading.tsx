@@ -4,7 +4,7 @@ const Heading = styled('h2', {
   display: 'block',
   margin: 0,
   fontFamily: '$sans',
-  fontSize: '$2',
+  fontSize: '$3',
   lineHeight: '$2',
   fontWeight: '$medium',
   color: '$grey500',
