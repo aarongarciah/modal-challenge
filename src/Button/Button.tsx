@@ -1,18 +1,8 @@
 import * as React from 'react';
 
 import { styled } from '../stitches.config';
-import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from '../types';
 
-interface Props {
-  children?: React.ReactNode;
-  variant?: 'default' | 'primary';
-}
-
-type ButtonProps<C extends React.ElementType> = PolymorphicComponentPropsWithRef<C, Props>;
-
-type ButtonComponent = <C extends React.ElementType = 'button'>(
-  props: ButtonProps<C>
-) => React.ReactElement | null;
+type ButtonProps = React.ComponentProps<typeof StyledButton> & { css?: any };
 
 const StyledButton = styled('button', {
   padding: '$1',
@@ -67,10 +57,8 @@ const StyledButton = styled('button', {
   },
 });
 
-const Button: ButtonComponent = React.forwardRef(
-  <C extends React.ElementType = 'button'>(props: ButtonProps<C>, ref?: PolymorphicRef<C>) => {
-    return <StyledButton type="button" {...props} ref={ref} />;
-  }
-);
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props: ButtonProps, ref) => (
+  <StyledButton type="button" {...props} ref={ref} />
+));
 
 export { Button };

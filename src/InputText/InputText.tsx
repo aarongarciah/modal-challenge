@@ -1,15 +1,11 @@
 import * as React from 'react';
 
 import { styled } from '../stitches.config';
-import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from '../types';
 
-interface Props {}
-
-type InputTextProps<C extends React.ElementType> = PolymorphicComponentPropsWithRef<C, Props>;
-
-type InputTextComponent = <C extends React.ElementType = 'input'>(
-  props: InputTextProps<C>
-) => React.ReactElement | null;
+type InputTextProps = React.ComponentProps<typeof StyledInput> & {
+  as?: string | React.ReactElement;
+  css?: any;
+};
 
 const StyledInput = styled('input', {
   display: 'block',
@@ -26,16 +22,14 @@ const StyledInput = styled('input', {
   },
 });
 
-const InputText: InputTextComponent = React.forwardRef(
-  <C extends React.ElementType = 'input'>(props: InputTextProps<C>, ref?: PolymorphicRef<C>) => {
-    return (
-      <StyledInput
-        type={!props.as || props.as === 'input' ? 'text' : undefined}
-        {...props}
-        ref={ref}
-      />
-    );
-  }
+const InputText = React.forwardRef<HTMLInputElement & HTMLTextAreaElement, InputTextProps>(
+  (props: InputTextProps, ref) => (
+    <StyledInput
+      type={!props.as || props.as === 'input' ? 'text' : undefined}
+      {...props}
+      ref={ref}
+    />
+  )
 );
 
 export { InputText };

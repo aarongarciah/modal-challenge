@@ -1,18 +1,11 @@
 import * as React from 'react';
 
 import { styled } from '../stitches.config';
-import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from '../types';
 
-interface Props {
+type IconTextButtonProps = React.ComponentProps<typeof StyledButton> & {
+  css?: any;
   icon: React.ReactNode;
-  children: React.ReactNode;
-}
-
-type ButtonProps<C extends React.ElementType> = PolymorphicComponentPropsWithRef<C, Props>;
-
-type IconTextButtonComponent = <C extends React.ElementType = 'button'>(
-  props: ButtonProps<C>
-) => React.ReactElement | null;
+};
 
 const StyledButton = styled('button', {
   display: 'inline-flex',
@@ -40,18 +33,13 @@ const StyledButton = styled('button', {
   },
 });
 
-const IconTextButton: IconTextButtonComponent = React.forwardRef(
-  <C extends React.ElementType = 'button'>(
-    { children, icon, ...rest }: ButtonProps<C>,
-    ref?: PolymorphicRef<C>
-  ) => {
-    return (
-      <StyledButton type="button" {...rest} ref={ref}>
-        {icon}
-        {children}
-      </StyledButton>
-    );
-  }
+const IconTextButton = React.forwardRef<HTMLButtonElement, IconTextButtonProps>(
+  ({ children, icon, ...rest }: IconTextButtonProps, ref) => (
+    <StyledButton type="button" {...rest} ref={ref}>
+      {icon}
+      {children}
+    </StyledButton>
+  )
 );
 
 export { IconTextButton };

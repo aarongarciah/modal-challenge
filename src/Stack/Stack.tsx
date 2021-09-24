@@ -2,20 +2,13 @@ import * as React from 'react';
 import type * as Stitches from '@stitches/react';
 
 import { CSS, styled, theme } from '../stitches.config';
-import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from '../types';
 
 type StackVariants = Stitches.VariantProps<typeof Wrapper>;
 
-interface Props {
-  children?: React.ReactNode;
+type StackProps = React.ComponentProps<typeof Wrapper> & {
+  css?: any;
   space?: StackVariants['space'];
-}
-
-type StackProps<C extends React.ElementType> = PolymorphicComponentPropsWithRef<C, Props>;
-
-type StackComponent = <C extends React.ElementType = 'div'>(
-  props: StackProps<C>
-) => React.ReactElement | null;
+};
 
 const space = {} as Record<string, CSS>;
 
@@ -35,17 +28,12 @@ const Wrapper = styled('div', {
   },
 });
 
-const Stack: StackComponent = React.forwardRef(
-  <C extends React.ElementType = 'div'>(
-    { children, ...rest }: StackProps<C>,
-    ref?: PolymorphicRef<C>
-  ) => {
-    return (
-      <Wrapper {...rest} ref={ref}>
-        {children}
-      </Wrapper>
-    );
-  }
+const Stack = React.forwardRef<HTMLDivElement, StackProps>(
+  ({ children, ...rest }: StackProps, ref) => (
+    <Wrapper {...rest} ref={ref}>
+      {children}
+    </Wrapper>
+  )
 );
 
 export { Stack };
