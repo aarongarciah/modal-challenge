@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { styled } from '../stitches.config';
+import { styled } from '../../stitches.config';
 
 type TextareaProps = React.ComponentProps<typeof StyledTextarea> & { css?: any };
 

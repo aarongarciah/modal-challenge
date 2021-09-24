@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { styled } from '../stitches.config';
+import { styled } from '../../stitches.config';
 import { Label } from '../Label';
 
 type FormControlProps = React.ComponentProps<typeof Wrapper> & { css?: any; label: string };

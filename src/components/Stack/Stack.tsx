@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type * as Stitches from '@stitches/react';
 
-import { CSS, styled, theme } from '../stitches.config';
+import { CSS, styled, theme } from '../../stitches.config';
 
 type StackVariants = Stitches.VariantProps<typeof Wrapper>;
 

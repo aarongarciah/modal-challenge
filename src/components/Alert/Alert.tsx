@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box } from '../Box';
 import { InfoIcon, WarningIcon } from '../icons';
 
-import { styled } from '../stitches.config';
+import { styled } from '../../stitches.config';
 
 type AlertProps = Omit<React.ComponentProps<typeof Box>, 'variant'> & {
   css?: any;

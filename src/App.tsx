@@ -1,14 +1,14 @@
 import { styled } from './stitches.config';
 import { globalStyles } from './globalStyles';
-import { Button } from './Button';
-import { InputText } from './InputText';
-import { Textarea } from './Textarea';
-import { IconTextButton } from './IconTextButton';
-import { CodeIcon, LinkIcon } from './icons';
-import { FormControl } from './FormControl';
-import { Stack } from './Stack';
-import { Box } from './Box';
-import { Heading } from './Heading';
+import { Button } from './components/Button';
+import { InputText } from './components/InputText';
+import { Textarea } from './components/Textarea';
+import { IconTextButton } from './components/IconTextButton';
+import { CodeIcon, LinkIcon } from './components/icons';
+import { FormControl } from './components/FormControl';
+import { Stack } from './components/Stack';
+import { Box } from './components/Box';
+import { Heading } from './components/Heading';
 
 const StyledWrapper = styled('main', {
   maxWidth: '500px',
@@ -47,4 +47,4 @@ function App() {
   );
 }
 
-export default App;
+export { App };

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { styled } from '../stitches.config';
+import { styled } from '../../stitches.config';
 
 type IconTextButtonProps = React.ComponentProps<typeof StyledButton> & {
   css?: any;
