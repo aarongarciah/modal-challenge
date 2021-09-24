@@ -7,6 +7,10 @@
     "email" : "aarongarciahervas@gmail.com",
     "url" : "https://twitter.com/aarongarciah"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aarongarciah/modal-challenge.git"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
