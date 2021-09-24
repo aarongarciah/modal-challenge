@@ -53,7 +53,7 @@ Complete.args = {
   children: ({ open, onClose, ...args }: any) => (
     <Dialog open={open} onClose={onClose} {...args}>
       <Dialog.Header>
-        <Dialog.Title>Title</Dialog.Title>
+        <Dialog.Title>Dialog title</Dialog.Title>
         <Dialog.CloseButton />
       </Dialog.Header>
       <Dialog.Content>
@@ -80,7 +80,7 @@ Large.args = {
   children: ({ open, onClose, ...args }: any) => (
     <Dialog open={open} onClose={onClose} size="large" {...args}>
       <Dialog.Header>
-        <Dialog.Title>Title</Dialog.Title>
+        <Dialog.Title>Dialog title</Dialog.Title>
         <Dialog.CloseButton />
       </Dialog.Header>
       <Dialog.Content>
@@ -130,7 +130,7 @@ WithoutFooter.args = {
   children: ({ open, onClose, ...args }: any) => (
     <Dialog open={open} onClose={onClose} {...args}>
       <Dialog.Header>
-        <Dialog.Title>Title</Dialog.Title>
+        <Dialog.Title>Dialog title</Dialog.Title>
         <Dialog.CloseButton />
       </Dialog.Header>
       <Dialog.Content>
@@ -149,7 +149,7 @@ WithoutCloseButton.args = {
   children: ({ open, onClose, ...args }: any) => (
     <Dialog open={open} onClose={onClose} {...args}>
       <Dialog.Header>
-        <Dialog.Title>Title</Dialog.Title>
+        <Dialog.Title>Dialog title</Dialog.Title>
       </Dialog.Header>
       <Dialog.Content>
         <p>
@@ -175,7 +175,7 @@ CustomFooter.args = {
   children: ({ open, onClose, ...args }: any) => (
     <Dialog open={open} onClose={onClose} {...args}>
       <Dialog.Header>
-        <Dialog.Title>Title</Dialog.Title>
+        <Dialog.Title>Dialog title</Dialog.Title>
         <Dialog.CloseButton />
       </Dialog.Header>
       <Dialog.Content>
@@ -228,7 +228,7 @@ Form.args = {
       {...args}
     >
       <Dialog.Header>
-        <Dialog.Title>Title</Dialog.Title>
+        <Dialog.Title>Dialog title</Dialog.Title>
         <Dialog.CloseButton />
       </Dialog.Header>
       <Dialog.Content>
@@ -259,7 +259,7 @@ AvoidClosingOnOverlayClick.args = {
   children: ({ open, onClose, ...args }: any) => (
     <Dialog open={open} onClose={onClose} closeOnOverlayClick={false} {...args}>
       <Dialog.Header>
-        <Dialog.Title>Title</Dialog.Title>
+        <Dialog.Title>Dialog title</Dialog.Title>
         <Dialog.CloseButton />
       </Dialog.Header>
       <Dialog.Content>
@@ -335,7 +335,7 @@ CustomFinalFocus.args = {
         </Box>
         <Dialog open={open} onClose={onClose} finalFocusRef={finalRef} {...args}>
           <Dialog.Header>
-            <Dialog.Title>Title</Dialog.Title>
+            <Dialog.Title>Dialog title</Dialog.Title>
             <Dialog.CloseButton />
           </Dialog.Header>
           <Dialog.Content>
@@ -423,18 +423,20 @@ OverflowingContent.args = {
   children: ({ open, onClose, ...args }: any) => (
     <Dialog open={open} onClose={onClose} {...args}>
       <Dialog.Header>
-        <Dialog.Title>Title</Dialog.Title>
+        <Dialog.Title>Dialog title</Dialog.Title>
         <Dialog.CloseButton />
       </Dialog.Header>
       <Dialog.Content>
         <Stack space="2">
-          {Array(30).fill(
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien,
-              nec tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in,
-              pretium vulputate enim. Praesent blandit eu sem sed vehicula.
-            </p>
-          )}
+          {Array(30)
+            .fill(null)
+            .map((_, i) => (
+              <p key={i}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum augue sapien,
+                nec tincidunt risus ullamcorper vehicula. Mauris justo dolor, euismod sed lorem in,
+                pretium vulputate enim. Praesent blandit eu sem sed vehicula.
+              </p>
+            ))}
         </Stack>
       </Dialog.Content>
       <Dialog.Footer>
@@ -445,6 +447,22 @@ OverflowingContent.args = {
           </Button>
         </Dialog.Actions>
       </Dialog.Footer>
+    </Dialog>
+  ),
+};
+
+export const WithoutFocusableElements = Template.bind({});
+WithoutFocusableElements.args = {
+  children: ({ open, onClose, ...args }: any) => (
+    <Dialog open={open} onClose={onClose} {...args}>
+      <Dialog.Header>
+        <Dialog.Title>Dialog title</Dialog.Title>
+      </Dialog.Header>
+      <Dialog.Content>
+        <p>
+          The inner dialog container will receive the focus if no focusable element is found inside.
+        </p>
+      </Dialog.Content>
     </Dialog>
   ),
 };

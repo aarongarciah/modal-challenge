@@ -8,6 +8,7 @@ import { CrossIcon } from '../icons';
 import { Heading } from '../Heading';
 import { Box } from '../Box';
 import { useId } from '../../hooks/useId';
+import { getAllFocusable } from '../../helpers/focus';
 
 interface FocusableElement {
   focus(options?: FocusOptions): void;
@@ -56,6 +57,7 @@ const Overlay = (props: OverlayProps) => {
       }}
       onClick={closeOnOverlayClick ? onClose : undefined}
       {...props}
+      data-dialog-overlay
     />
   );
 };
@@ -74,6 +76,7 @@ const Inner = styled('section', {
   0 4px 4px hsl(0deg 0% 0% / 0.075),
   0 8px 8px hsl(0deg 0% 0% / 0.075),
   0 16px 16px hsl(0deg 0% 0% / 0.075)`,
+  outline: 'none',
   variants: {
     size: {
       regular: {
@@ -175,15 +178,16 @@ const DialogActions = styled('div', {
   gap: '$2',
 });
 
-interface DialogProps {
+type DialogProps = React.ComponentProps<typeof Inner> & {
   children: React.ReactNode;
+  css?: any;
   closeOnOverlayClick?: boolean;
   initialFocusRef?: React.RefObject<FocusableElement>;
   finalFocusRef?: React.RefObject<FocusableElement>;
   onClose?: () => void;
   open?: boolean;
   size?: Stitches.VariantProps<typeof Inner>['size'];
-}
+};
 
 const Dialog = ({
   children,
@@ -191,17 +195,35 @@ const Dialog = ({
   finalFocusRef,
   initialFocusRef,
   onClose,
+  onKeyDown,
   open,
   size = 'regular',
   ...rest
 }: DialogProps) => {
   const labelId = useId();
+  const innerRef = React.useRef<HTMLElement>(null);
   const handleActivation = React.useCallback(() => {
-    initialFocusRef?.current?.focus();
+    if (initialFocusRef?.current) {
+      initialFocusRef.current.focus();
+    } else if (innerRef?.current) {
+      const focusableElems = getAllFocusable(innerRef.current);
+      if (focusableElems.length === 0) {
+        innerRef?.current?.focus();
+      }
+    }
   }, [initialFocusRef]);
   const handleDeactivation = React.useCallback(() => {
     finalFocusRef?.current?.focus();
   }, [finalFocusRef]);
+  const handleKeyDown = React.useCallback(
+    (event: React.KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.stopPropagation();
+        onClose?.();
+      }
+    },
+    [onClose]
+  );
   return open
     ? createPortal(
         <DialogContext.Provider value={{ closeOnOverlayClick, labelId, onClose }}>
@@ -213,7 +235,19 @@ const Dialog = ({
           >
             <Outer>
               <Overlay />
-              <Inner aria-labelledby={labelId} size={size} {...rest}>
+              <Inner
+                aria-modal="true"
+                aria-labelledby={labelId}
+                role="dialog"
+                size={size}
+                onKeyDown={(e: React.KeyboardEvent) => {
+                  onKeyDown?.(e as React.KeyboardEvent<HTMLElement>);
+                  handleKeyDown(e);
+                }}
+                tabIndex={-1}
+                {...rest}
+                ref={innerRef}
+              >
                 {children}
               </Inner>
             </Outer>
