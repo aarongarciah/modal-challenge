@@ -2,6 +2,11 @@
   "name": "modal-challenge",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name" : "Aaron Garcia Hervas",
+    "email" : "aarongarciahervas@gmail.com",
+    "url" : "https://twitter.com/aarongarciah"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
