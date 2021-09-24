@@ -2,7 +2,6 @@ import React, { FormEvent } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Dialog } from '.';
-import type { DialogProps } from '.';
 import { Button } from '../Button';
 import { Box } from '../Box';
 import { IconTextButton } from '../IconTextButton';
@@ -12,8 +11,10 @@ import { FormControl } from '../FormControl';
 import { InputText } from '../InputText';
 import { Textarea } from '../Textarea';
 
+import type { DialogProps } from '.';
+
 export default {
-  title: 'Dialog',
+  title: 'Components / Dialog',
   component: Dialog,
   argTypes: {
     children: {
@@ -405,4 +406,80 @@ CustomFinalFocus.args = {
       </>
     );
   },
+};
+
+export const AlertDialog = Template.bind({});
+AlertDialog.storyName = 'Alert Dialog: Alert';
+AlertDialog.args = {
+  children: ({ open, onClose, ...args }: any) => (
+    <Dialog open={open} onClose={onClose} role="alertdialog" {...args}>
+      <Dialog.Header>
+        <Dialog.Title>Alert</Dialog.Title>
+        <Dialog.CloseButton />
+      </Dialog.Header>
+      <Dialog.Content>
+        <p>
+          This is an example of an alert message that is so important that deserved a modal dialog.
+        </p>
+      </Dialog.Content>
+      <Dialog.Footer>
+        <Dialog.Actions>
+          <Button variant="primary" onClick={onClose}>
+            Got it
+          </Button>
+        </Dialog.Actions>
+      </Dialog.Footer>
+    </Dialog>
+  ),
+};
+
+export const AlertDialogConfirm = Template.bind({});
+AlertDialogConfirm.storyName = 'Alert Dialog: Confirm';
+AlertDialogConfirm.args = {
+  children: ({ open, onClose, ...args }: any) => (
+    <Dialog open={open} onClose={onClose} role="alertdialog" {...args}>
+      <Dialog.Header>
+        <Dialog.Title>Apply changes?</Dialog.Title>
+        <Dialog.CloseButton />
+      </Dialog.Header>
+      <Dialog.Content>
+        <p>
+          This will overwrite all visualizations on connected dashboard widgets. This action cannot
+          be undone.
+        </p>
+      </Dialog.Content>
+      <Dialog.Footer>
+        <Dialog.Actions>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button variant="primary" onClick={onClose}>
+            Got it
+          </Button>
+        </Dialog.Actions>
+      </Dialog.Footer>
+    </Dialog>
+  ),
+};
+
+export const AlertDialogDestructive = Template.bind({});
+AlertDialogDestructive.storyName = 'Alert Dialog: Destructive';
+AlertDialogDestructive.args = {
+  children: ({ open, onClose, ...args }: any) => (
+    <Dialog open={open} onClose={onClose} role="alertdialog" {...args}>
+      <Dialog.Header>
+        <Dialog.Title>Delete user?</Dialog.Title>
+        <Dialog.CloseButton />
+      </Dialog.Header>
+      <Dialog.Content>
+        <p>This will permanently delete John Doe. This action cannot be undone.</p>
+      </Dialog.Content>
+      <Dialog.Footer>
+        <Dialog.Actions>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button variant="destructive" onClick={onClose}>
+            Delete user
+          </Button>
+        </Dialog.Actions>
+      </Dialog.Footer>
+    </Dialog>
+  ),
 };
