@@ -51,6 +51,15 @@ const StyledButton = styled('button', {
           backgroundColor: '$black',
         },
       },
+      destructive: {
+        borderColor: '$destructive',
+        backgroundColor: '$destructive',
+        color: '$white',
+        '&:hover, &:active': {
+          borderColor: '$black',
+          backgroundColor: '$black',
+        },
+      },
     },
   },
   defaultVariants: {
