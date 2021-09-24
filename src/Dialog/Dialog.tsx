@@ -7,7 +7,7 @@ import { styled } from '../stitches.config';
 import { CrossIcon } from '../icons';
 import { Heading } from '../Heading';
 import { Box } from '../Box';
-import { useId } from '../hooks';
+import { useId } from '../hooks/useId';
 
 interface FocusableElement {
   focus(options?: FocusOptions): void;
