@@ -408,6 +408,65 @@ CustomFinalFocus.args = {
   },
 };
 
+export const Nested = Template.bind({});
+Nested.args = {
+  children: function Nested({ open, onClose, ...args }: any) {
+    const [confirmationOpen, setConfirmationOpen] = React.useState(false);
+    const handleClose = () => {
+      onClose();
+    };
+    const handleDelete = () => {
+      setConfirmationOpen(true);
+    };
+    const handleCancel = () => {
+      setConfirmationOpen(false);
+    };
+    const handleConfirm = () => {
+      setConfirmationOpen(false);
+      onClose();
+    };
+    return (
+      <>
+        <Dialog open={open} onClose={handleClose} role="alertdialog" {...args}>
+          <Dialog.Header>
+            <Dialog.Title>Delete user?</Dialog.Title>
+            <Dialog.CloseButton />
+          </Dialog.Header>
+          <Dialog.Content>
+            <p>This will permanently delete John Doe. This action cannot be undone.</p>
+          </Dialog.Content>
+          <Dialog.Footer>
+            <Dialog.Actions>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button variant="destructive" onClick={handleDelete}>
+                Delete user
+              </Button>
+            </Dialog.Actions>
+          </Dialog.Footer>
+        </Dialog>
+
+        <Dialog open={confirmationOpen} onClose={handleCancel} role="alertdialog" {...args}>
+          <Dialog.Header>
+            <Dialog.Title>Confirm user deletion</Dialog.Title>
+            <Dialog.CloseButton />
+          </Dialog.Header>
+          <Dialog.Content>
+            <p>This will permanently delete John Doe. This action cannot be undone.</p>
+          </Dialog.Content>
+          <Dialog.Footer>
+            <Dialog.Actions>
+              <Button onClick={handleCancel}>Cancel</Button>
+              <Button variant="destructive" onClick={handleConfirm}>
+                Delete user
+              </Button>
+            </Dialog.Actions>
+          </Dialog.Footer>
+        </Dialog>
+      </>
+    );
+  },
+};
+
 export const AlertDialog = Template.bind({});
 AlertDialog.storyName = 'Alert Dialog: Alert';
 AlertDialog.args = {
