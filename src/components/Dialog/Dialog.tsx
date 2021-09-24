@@ -99,6 +99,7 @@ const DialogHeader = styled('header', {
   justifyContent: 'space-between',
   padding: '$3',
   borderBottom: '1px solid $grey400',
+  backgroundColor: '$grey400',
 });
 
 type DialogTitleProps = React.ComponentProps<typeof Heading> & { css?: any };
