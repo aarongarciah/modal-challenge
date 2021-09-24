@@ -2,6 +2,7 @@ import React, { FormEvent } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Dialog } from '.';
+import { Alert } from '../Alert';
 import { Button } from '../Button';
 import { Box } from '../Box';
 import { IconTextButton } from '../IconTextButton';
@@ -467,9 +468,9 @@ Nested.args = {
   },
 };
 
-export const AlertDialog = Template.bind({});
-AlertDialog.storyName = 'Alert Dialog: Alert';
-AlertDialog.args = {
+export const AlertDialogAlert = Template.bind({});
+AlertDialogAlert.storyName = 'Alert Dialog: Alert';
+AlertDialogAlert.args = {
   children: ({ open, onClose, ...args }: any) => (
     <Dialog open={open} onClose={onClose} role="alertdialog" {...args}>
       <Dialog.Header>
@@ -477,9 +478,12 @@ AlertDialog.args = {
         <Dialog.CloseButton />
       </Dialog.Header>
       <Dialog.Content>
-        <p>
-          This is an example of an alert message that is so important that deserved a modal dialog.
-        </p>
+        <Alert>
+          <p>
+            This is an example of an alert message that is so important that deserved a modal
+            dialog.
+          </p>
+        </Alert>
       </Dialog.Content>
       <Dialog.Footer>
         <Dialog.Actions>
@@ -502,10 +506,12 @@ AlertDialogConfirm.args = {
         <Dialog.CloseButton />
       </Dialog.Header>
       <Dialog.Content>
-        <p>
-          This will overwrite all visualizations on connected dashboard widgets. This action cannot
-          be undone.
-        </p>
+        <Alert>
+          <p>
+            This will overwrite all visualizations on connected dashboard widgets. This action
+            cannot be undone.
+          </p>
+        </Alert>
       </Dialog.Content>
       <Dialog.Footer>
         <Dialog.Actions>
@@ -529,7 +535,9 @@ AlertDialogDestructive.args = {
         <Dialog.CloseButton />
       </Dialog.Header>
       <Dialog.Content>
-        <p>This will permanently delete John Doe. This action cannot be undone.</p>
+        <Alert variant="error">
+          <p>This will permanently delete John Doe. This action cannot be undone.</p>
+        </Alert>
       </Dialog.Content>
       <Dialog.Footer>
         <Dialog.Actions>

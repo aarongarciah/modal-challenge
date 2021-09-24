@@ -12,6 +12,7 @@ export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme
         grey500: '#4e5b63',
         grey400: '#c7ced4',
         primary: '$colors$blue500',
+        info: '$colors$blue500',
         destructive: '$colors$red500',
       },
       space: {
